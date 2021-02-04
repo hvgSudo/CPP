@@ -27,6 +27,7 @@ int main() {
         cout << endl << "1. Add to the list";
         cout << endl << "2. Display the list";
         cout << endl << "3. Exit";
+        cout << endl << "Enter your choice: ";
         cin >> choice;
         switch(choice) {
             case 1:
@@ -61,8 +62,11 @@ void list::add() {
 }
 
 void list::display() {
+    cout << endl << "The list is";
+    link = head;
+    cout << " " << link->data;
     while (link != NULL) {
-        cout << " " << link->data;
         link = link->next;
+        cout << " " << link->data;
     }
 }
