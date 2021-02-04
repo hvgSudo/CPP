@@ -9,9 +9,13 @@ class node {
 };
 
 class list : private node {
-    node *link;
+    node *link, *head;
     int d;
     public:
+        list() {
+            link = NULL;
+            head = NULL;
+        }
         void add();
         void display();
 };
@@ -47,7 +51,13 @@ void list::add() {
     node *a = new node;
     a->data = d;
     a->next = NULL;
-    link->next = a;
+    if (head == NULL) {
+        head = a;
+        link = a;
+    } else {
+        link->next = a;
+        link = a;
+    }
 }
 
 void list::display() {
