@@ -8,36 +8,51 @@ class node {
         node *next;
 };
 
-void add(node **, int);
-void display(node *);
+class list : private node {
+    node *link;
+    int d;
+    public:
+        void add();
+        void display();
+};
 
 int main() {
-    int d, n;
-    node *head = NULL;
-    cout << endl << "How many numbers do you want to enter: ";
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cout << endl << "Number " << i + 1 << ": ";
-        cin >> d;
-        add(&head, d); 
+    list l;
+    int choice, a = 1;
+    while (a == 1) {
+        cout << endl << "1. Add to the list";
+        cout << endl << "2. Display the list";
+        cout << endl << "3. Exit";
+        cin >> choice;
+        switch(choice) {
+            case 1:
+                l.add();
+                break;
+            case 2:
+                l.display();
+                break;
+            case 3:
+                a = 0;
+                break;
+            default:
+                cout << endl << "Wrong choice";
+        }
     }
-    for (int i = 0; i < n; i++)
-        display(head);
     return 0;
 }
 
-void add(node **head_ref, int data) {
-    node *new_node = NULL;
-    new_node = new node();
-    new_node->data = data;
-    new_node->next = *head_ref;
-    *head_ref = new_node;
+void list::add() {
+    cout << endl << "Enter the number to be entered to the list: ";
+    cin >> d;
+    node *a = new node;
+    a->data = d;
+    a->next = NULL;
+    link->next = a;
 }
 
-void display(node *head) {
-    cout << endl;
-    while (head != NULL) {
-        cout << head->data << " ";
-        head = head->next;
+void list::display() {
+    while (link != NULL) {
+        cout << " " << link->data;
+        link = link->next;
     }
 }
