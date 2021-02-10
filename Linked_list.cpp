@@ -17,7 +17,10 @@ class list : private node {
             head = NULL;
         }
         void add();
+        void add_middle();
         void display();
+        void delete_node();
+        void delete_last();
 };
 
 int main() {
@@ -61,6 +64,22 @@ void list::add() {
     }
 }
 
+void list::add_middle() {
+    int x, n, i = 0;
+    node *b = new node;
+    cin >> x;
+    b->data = x;
+    b->next = NULL;
+    cout << "Enter the position: ";
+    cin >> n;
+    while (i != n -1) {
+        link = link->next;
+        i++;
+    }
+    b->next = link->next;
+    link->next = b;
+}
+
 void list::display() {
     cout << endl << "The list is";
     link = head;
@@ -70,3 +89,10 @@ void list::display() {
         cout << " " << link->data;
     }
 }
+
+void list::delete_node() {
+    link = head;
+    head = head->next;
+    delete(link);
+}
+
