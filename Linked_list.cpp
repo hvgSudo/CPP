@@ -20,7 +20,8 @@ class list : private node {
         void add_middle();
         void display();
         void delete_node();
-        void delete_last();
+        void delete_last_node();
+        void delete_intermmediate();
 };
 
 int main() {
@@ -92,7 +93,29 @@ void list::display() {
 
 void list::delete_node() {
     link = head;
-    head = head->next;
+    head = head->next; // or head = link->next;
     delete(link);
 }
 
+void list::delete_last_node() {
+    link = head;
+    node *a;
+    while(link->next->next != NULL) 
+        link = link->next;
+    a = link->next;
+    link->next = NULL;
+    delete(a);
+}
+
+void list::delete_intermmediate() {
+    node *a;
+    int n;
+    link = head;
+    cout << "Enter position: ";
+    cin >> n;
+    for (int i = 0; i < n - 1; i++)
+        link = link->next;
+    a = link->next;
+    link->next = link->next->next; // or link->next = a->next;
+    delete(a);
+}
