@@ -22,6 +22,7 @@ class list : private node {
         void delete_node();
         void delete_last_node();
         void delete_intermmediate();
+        void invert();
 };
 
 int main() {
@@ -118,4 +119,17 @@ void list::delete_intermmediate() {
     a = link->next;
     link->next = link->next->next; // or link->next = a->next;
     delete(a);
+}
+
+void list::invert() {
+    node *forward, *current, *backward;
+    forward = head;
+    current = NULL;
+    while (forward != NULL) {
+        backward = current;
+        current = forward;
+        forward = forward->next;
+        current->next = backward;
+    }
+    head = current;
 }
