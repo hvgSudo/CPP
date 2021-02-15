@@ -8,9 +8,13 @@ class node {
         node *next;
 };
 
-class linkedList {
+class linkedList : private node {
     node *link, *head;
     public:
+        linkedList() {
+            head = NULL;
+            link = NULL;
+        }
         void create(int);
         void display();
 };
@@ -50,8 +54,8 @@ void linkedList::create(int data) {
     temp->data = data;
     temp->next = NULL;
     if (head == NULL) {
-        head->next = temp;
-        link->next = temp;
+        head = temp;
+        link = temp;
     } else {
         link->next = temp;
         link = temp;
