@@ -15,7 +15,7 @@ class linkedList : private node {
         linkedList() {
             head = NULL;
             link = NULL;
-            count = 1;
+            count = 0;
         }
         int getCount() {
             return count;
@@ -41,7 +41,7 @@ int main() {
                 cout << endl << "1. At the beginning";
                 cout << endl << "2. At any position";
                 cout << endl << "3. At the end";
-                cout << endl << "The list has " << l.getCount() - 1
+                cout << endl << "The list has " << l.getCount()
                     << " elements";
                 cout << endl << "Enter your choice: ";
                 cin >> c;
@@ -83,7 +83,7 @@ void linkedList::insert(int data, int position) {
     } else if (position == 2) {
         temp->data = data;
         temp->next = NULL;
-        while (n < position) {
+        while (n != position - 1) {
             link = link->next;
             n = n + 1;
         }
