@@ -20,12 +20,12 @@ class linkedList : private node {
         int getCount() {
             return count;
         }
-        void insert(int, int);
+        void insert(int, int, int);
         void display();
 };
 
 int main() {
-    int d, choice, c;
+    int d, choice, c, position;
     char ch = 'y';
     linkedList l;
     while (ch == 'y') {
@@ -46,11 +46,14 @@ int main() {
                 cout << endl << "Enter your choice: ";
                 cin >> c;
                 if (c == 1) 
-                    l.insert(d, 1);
-                else if (c == 2)
-                    l.insert(d, 2);
+                    l.insert(d, 1, 0);
+                else if (c == 2) {
+                    cout << endl << "Enter the position: ";
+                    cin >> position;
+                    l.insert(d, 2, position);
+                }
                 else
-                    l.insert(d, 3);
+                    l.insert(d, 3, 0);
                 break;
             case 2:
                 cout << endl << "The list is";
@@ -66,37 +69,35 @@ int main() {
     return 0;
 }
 
-void linkedList::insert(int data, int position) {
+void linkedList::insert(int data, int position, int place) {
     count = count + 1;
-    int n = 0;
+    int n = 1;
     node *temp = new node;
-    if (position == 1) {
-        temp->data = data;
-        temp->next = NULL;
-        if (head == NULL) {
-            head = temp;
-            link = temp;
-        } else {
+    temp->data = data;
+    temp->next = NULL;
+    if (head == NULL) {
+        head = temp;
+        link = temp;
+    } else {
+        if (position == 1) {
             link->next = temp;
             link = temp;
-        }
-    } else if (position == 2) {
-        temp->data = data;
-        temp->next = NULL;
-        while (n != position - 1) {
-            link = link->next;
-            n = n + 1;
-        }
-        temp->next = link->next;
-        link->next = temp;
-    } else if (position == 3) {
-        temp->data = data;
-        temp->next = NULL;
-        while (link->next->next != NULL)
-            link = link->next;
-        temp->next = link->next->next;
-        link->next = temp;
-    }     
+        } else if (position == 2) {
+            link = head;
+            while (n < place) {
+                link = link->next;
+                n = n + 1;
+            }
+            temp->next = link->next;
+            link->next = temp;
+        } else if (position == 3) {
+            link = head;
+            while (link->next != NULL)
+                link = link->next;
+            temp->next = link->next;
+            link->next = temp;
+        }     
+    }
 }
 
 void linkedList::display() {
