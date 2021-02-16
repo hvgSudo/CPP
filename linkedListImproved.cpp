@@ -21,17 +21,33 @@ class linkedList : private node {
             return count;
         }
         void insert(int, int, int);
+        void deleteNode(int);
         void display();
+        void reverse();
+        friend void concatenate(linkedList, linkedList);
 };
 
 int main() {
-    int d, choice, c, position;
-    char ch = 'y';
-    linkedList l;
+    int d, choice, c, position, list, r;
+    char ch = 'y', h;
+    linkedList l[2];
     while (ch == 'y') {
+        cout << endl << "You have two lists";
+        cout << endl << "Do you want to concatenate " << 
+            "the two lists(y/n): ";
+        cin >> h;
+        if (h == 'y')
+            concatenate(l[0], l[1]);
+        cout << endl << "Which linked list do you want to" <<
+            " work upon (1 or 2): ";
+        cin >> list;
+        r = list - 1;
         cout << endl << "1. Insert to the list";
         cout << endl << "2. Display the list";
-        cout << endl << "3. Exit";
+        cout << endl << "3. Delete a node";
+        cout << endl << "4. Reverse the list";
+        cout << endl << "5. Concatenate two lists";
+        cout << endl << "6. Exit";
         cout << endl << "Enter your choice: ";
         cin >> choice;
         switch(choice) {
@@ -41,25 +57,45 @@ int main() {
                 cout << endl << "1. At the beginning";
                 cout << endl << "2. At any position";
                 cout << endl << "3. At the end";
-                cout << endl << "The list has " << l.getCount()
+                cout << endl << "The list has " << l[r].getCount()
                     << " elements";
                 cout << endl << "Enter your choice: ";
                 cin >> c;
                 if (c == 1) 
-                    l.insert(d, 1, 0);
+                    l[r].insert(d, 1, 0);
                 else if (c == 2) {
                     cout << endl << "Enter the position: ";
                     cin >> position;
-                    l.insert(d, 2, position);
+                    l[r].insert(d, 2, position);
                 }
                 else
-                    l.insert(d, 3, 0);
+                    l[r].insert(d, 3, 0);
                 break;
             case 2:
                 cout << endl << "The list is";
-                l.display();
+                l[r].display();
                 break;
             case 3:
+                cout << endl << "1. Beginning node";
+                cout << endl << "2. Any position";
+                cout << endl << "3. Last node";
+                cout << endl << "The list has " << l[r].getCount()
+                    << " elements";
+                cout << "Enter your choice: ";
+                cin >> c;
+                if (c == 1)
+                    l[r].deleteNode(0);
+                else if (c == 2) {
+                    cout << endl << "Enter the position: ";
+                    cin >> position;
+                    l[r].deleteNode(position);
+                } else
+                    l[r].deleteNode(-1);
+                break;
+            case 4:
+                l[r].reverse();
+                break;
+            case 5:
                 ch = 'n';
                 break;
             default:
@@ -98,6 +134,8 @@ void linkedList::insert(int data, int position, int place) {
             link->next = temp;
         }     
     }
+    cout << endl << "Element successfully inserted";
+    display();
 }
 
 void linkedList::display() {
@@ -106,5 +144,67 @@ void linkedList::display() {
     while (temp != NULL) {
         cout << endl << "\t" << temp->data;
         temp = temp->next; 
+    }
+}
+
+void linkedList::deleteNode(int position) {
+    count = count - 1;
+    if (head == NULL) {
+        cout << endl << "List is empty - Underflow";
+        return;
+    }
+    link = head;
+    if (position == 0) {
+        head = link->next;
+        delete(link);
+    } else if (position == -1) { // delete from the last
+        node *temp;
+        while (link->next->next != NULL)
+            link = link->next;
+        temp = link->next;
+        link->next = NULL;
+        delete(temp);
+    } else {
+        node *temp;
+        for (int i = 0; i < position - 1; i++) 
+            link = link->next;
+        temp = link->next;
+        link->next = temp->next;
+        delete(temp);
+    }
+    cout << endl << "Element successfully deleted";
+    display();
+}
+
+void linkedList::reverse() {
+    node *forward, *current, *backward;
+    forward = head;
+    current = NULL;
+    while (forward != NULL) {
+        backward = current;
+        current = forward;
+        forward = forward->next;
+        current->next = backward;
+    }
+    head = current;
+    cout << endl << "List successfully reversed";
+    display();
+}
+
+void concatenate(linkedList first, linkedList second) {
+    if (first.head == NULL) {
+        cout << endl << "First list is not initialized";
+        return;
+    } else if (second.head == NULL) {
+        cout << endl << "Second list is not initialized";
+        return;
+    } else {
+        // Concatenating
+        first.link = first.head;
+        while (first.link != NULL)
+            first.link = first.link->next;
+        first.link->next = second.head;
+        cout << endl << "After concatenating";
+        first.display();
     }
 }
