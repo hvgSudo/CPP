@@ -15,7 +15,13 @@ class node {
 
 class binaryTree {
     node *root;
-    void preorder(node *currentNode);
+    void preorder(node *currentNode) {
+        if (currentNode != NULL) {
+            cout << currentNode->data << " ";
+            preorder(currentNode->left);
+            preorder(currentNode->right);
+        }
+    }
     void inorder(node *currentNode);
     void postorder(node *currentNode);
     public:
@@ -37,6 +43,7 @@ class binaryTree {
 int main() {
     binaryTree b;
     b.create();
+    b.preorder();
     return 0;
 }
 
@@ -76,4 +83,9 @@ void binaryTree::create() {
         cout << endl << "Any more nodes(y/n): ";
         cin >> choice;
     } while (choice == 'y' || choice == 'Y');
+}
+
+void binaryTree::preorder() {
+    cout << endl << "Preorder traversal: ";
+    preorder(root);
 }
