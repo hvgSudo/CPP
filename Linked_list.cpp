@@ -1,4 +1,4 @@
-#include<iostream>
+/* #include<iostream>
 
 using namespace std;
 
@@ -23,6 +23,7 @@ class list : private node {
         void delete_last_node();
         void delete_intermmediate();
         void invert();
+        void create_CLL();
 };
 
 int main() {
@@ -133,3 +134,25 @@ void list::invert() {
     }
     head = current;
 }
+
+void list::create_CLL() {
+    int x;
+    node *newNode = new node;
+    cout << "Enter data: ";
+    cin >> x;
+    newNode->data = x;
+    newNode->next = NULL;
+    if (head == NULL) {
+        head = link = newNode;
+        newNode->next = link;
+    } else {
+        link->next = newNode;
+        newNode->next = head;
+        link = link->next;
+    }
+}
+
+void insertCLL {
+    node *newNode = new node;
+    newNode
+} */

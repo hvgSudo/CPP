@@ -28,15 +28,52 @@ class binaryTree {
         void inorder();
         void insert(char c);
         void deleteNode(char c);
-        void totalNode();
+        void totalNodes();
+        int leafNodes();
+        void mirror(binaryTree &);
+        void copy(binaryTree &);
 };
 
 int main() {
+    binaryTree b;
+    b.create();
     return 0;
 }
 
-void create() {
+void binaryTree::create() {
     node *temp, *newNode;
     char ans, c, choice;
-    
+    int ch;
+    do {
+        cout << endl << "Enter the element to be attached: ";
+        cin >> ch;
+        newNode = new node(ch);
+        if (root == NULL)
+            root = newNode;
+        else {
+            temp = root;
+            while (1) {
+                cout << endl << "Left or right (l/r) of " << 
+                temp->data << ": ";
+                cin >> ans;
+                if (ans == 'l') {
+                    if (temp->left == NULL) {
+                        temp->left = newNode;
+                        break;
+                    }
+                    else
+                        temp = temp->left;
+                } else {
+                    if (temp->right == NULL) {
+                        temp->right = newNode;
+                        break;
+                    }
+                    else
+                        temp = temp->right;
+                }
+            }
+        } 
+        cout << endl << "Any more nodes(y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
 }

@@ -22,6 +22,9 @@ class linkedList : private node {
         }
         void insert(int, int, int);
         void deleteNode(int);
+        node *getHead() {
+            return head;
+        }
         void display();
         void reverse();
         friend void concatenate(linkedList, linkedList);
@@ -46,8 +49,7 @@ int main() {
         cout << endl << "2. Display the list";
         cout << endl << "3. Delete a node";
         cout << endl << "4. Reverse the list";
-        cout << endl << "5. Concatenate two lists";
-        cout << endl << "6. Exit";
+        cout << endl << "5. Exit";
         cout << endl << "Enter your choice: ";
         cin >> choice;
         switch(choice) {
@@ -200,11 +202,22 @@ void concatenate(linkedList first, linkedList second) {
         return;
     } else {
         // Concatenating
+        cout << endl << "Concatenation";
         first.link = first.head;
-        while (first.link != NULL)
+        cout << endl << "Under process";
+        while (first.link->next != NULL)
             first.link = first.link->next;
-        first.link->next = second.head;
+        cout << endl <<"End of list one";
+        first.link->next = second.getHead();
         cout << endl << "After concatenating";
         first.display();
     }
+    /*node *a, *b;
+    a = first.head;
+    b = second.head;
+    while (a->next != NULL)
+        a = a->next;
+    a->next = b;
+    first.head = a;
+    first.display();*/
 }
