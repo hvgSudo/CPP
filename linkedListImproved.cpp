@@ -212,12 +212,4 @@ void concatenate(linkedList first, linkedList second) {
         cout << endl << "After concatenating";
         first.display();
     }
-    /*node *a, *b;
-    a = first.head;
-    b = second.head;
-    while (a->next != NULL)
-        a = a->next;
-    a->next = b;
-    first.head = a;
-    first.display();*/
 }
