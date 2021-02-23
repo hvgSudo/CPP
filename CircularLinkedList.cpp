@@ -21,7 +21,7 @@ class CircularLinkedList : private Node {
 
 int main() {
     CircularLinkedList c;
-    char ch;
+    char ch = 'y';
     int option = -1, data, position = -1;
     int choice;
     while (ch == 'y') {
@@ -35,7 +35,7 @@ int main() {
         cout << endl << "8. Delete node from the end";
         cout << endl << "9. Exit";
         cout << endl << "Enter your choice: ";
-        cin >> ch;
+        cin >> choice;
         switch (choice) {
             case 1:
                 cout << endl << "Enter data to create the list: ";
