@@ -161,8 +161,12 @@ void CircularLinkedList::deleteNode(int option,
         link = head;
         if (option == 1) { 
             // delete at beginning
-            head = link->next;
-            delete(link);
+            link = temp = head;
+            while (link->next != head) 
+                link = link->next;
+            head = head->next;
+            link->next = head;
+            delete(temp);
         } else if (option == 2) {
             // delete at any position
             for (int i = 0; i < position - 1; i++)
@@ -172,6 +176,7 @@ void CircularLinkedList::deleteNode(int option,
                 delete(temp);
         } else if (option == 3) {
             // delete from last
+            link = head;
             while (link->next->next != head)
                 link= link->next;
             temp = link->next;

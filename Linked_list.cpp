@@ -152,7 +152,13 @@ void list::create_CLL() {
     }
 }
 
-void insertCLL {
-    node *newNode = new node;
-    newNode
+void concatTwoCLLs(list l) {
+    link = head;
+    while (link->next != head)
+        link = link->next;
+    link = l.head;
+    l.link = l.head;
+    while (l.link->next != l.head)
+        l.link = l.link->next;
+    l.link->next = head;
 } */
