@@ -8,23 +8,36 @@ class Node {
         Node *next;
 };
 
-class CircularLinkedList : private Node {
+class circularLinkedList : private Node {
     Node *link, *head;
     public:
-        CircularLinkedList() {
+        circularLinkedList() {
             head = link = NULL;
         }
         void insert(int, int, int);
         void deleteNode(int, int);
         void display();
+        void reverse();
+        friend void concatenate(circularLinkedList,
+            circularLinkedList);
 };
 
 int main() {
-    CircularLinkedList c;
-    char ch = 'y';
+    circularLinkedList c[2];
+    char ch = 'y', h;
     int option = -1, data, position = -1;
-    int choice;
+    int choice, list, r;
     while (ch == 'y') {
+        cout << endl << "You have two lists";
+        cout << endl << "Do you want to concatenate " << 
+            "the two lists(y/n): ";
+        cin >> h;
+        if (h == 'y')
+            concatenate(c[0], c[1]);
+        cout << endl << "Which linked list do you want to" <<
+            " work upon (1 or 2): ";
+        cin >> list;
+        r = list - 1;
         cout << endl << "1. Create the list";
         cout << endl << "2. Insert at beginning";
         cout << endl << "3. Insert at any position";
@@ -33,59 +46,72 @@ int main() {
         cout << endl << "6. Delete node from start";
         cout << endl << "7. Delete node at any position";
         cout << endl << "8. Delete node from the end";
-        cout << endl << "9. Exit";
+        cout << endl << "9. Reverse the list";
+        cout << endl << "10. Exit";
         cout << endl << "Enter your choice: ";
         cin >> choice;
         switch (choice) {
             case 1:
                 cout << endl << "Enter data to create the list: ";
                 cin >> data;
-                c.insert(1, data, position);
-                c.display();
+                c[r].insert(1, data, position);
+                c[r].display();
                 break;
             case 2:
                 cout << endl << "Enter the data: ";
                 cin >> data;
-                c.insert(2, data, position);
-                c.display();
+                c[r].insert(2, data, position);
+                cout << endl << "After Insertion";
+                c[r].display();
                 break;
             case 3:
                 cout << endl << "Enter the data: ";
                 cin >> data;
-                c.display();
+                c[r].display();
                 cout << endl << "Enter the position: ";
                 cin >> position;
-                c.insert(3, data, position);
-                c.display();
+                c[r].insert(3, data, position);
+                cout << endl << "After Insertion";
+                c[r].display();
                 break;
             case 4:
                 cout << endl << "Enter the data: ";
                 cin >> data;
-                c.insert(4, data, position);
-                c.display();
+                c[r].insert(4, data, position);
+                cout << endl << "After Insertion";
+                c[r].display();
                 break;
             case 5:
-                c.display();
+                c[r].display();
                 break;
             case 6:
-                c.display();
-                c.deleteNode(1, position);
-                c.display();
+                c[r].display();
+                c[r].deleteNode(1, position);
+                cout << endl << "After Deletion";
+                c[r].display();
                 break;
             case 7:
-                c.display();
+                c[r].display();
                 cout << endl << "Enter the position from"
                     << " where you want to delete data: ";
                 cin >> position;
-                c.deleteNode(2, position);
-                c.display();
+                c[r].deleteNode(2, position);
+                cout << endl << "After Deletion";
+                c[r].display();
                 break;
             case 8:
-                c.display();
-                c.deleteNode(3, position);
-                c.display();
+                c[r].display();
+                c[r].deleteNode(3, position);
+                cout << endl << "After Deletion";
+                c[r].display();
                 break;
             case 9:
+                c[r].display();
+                c[r].reverse();
+                cout << endl << "After reversal";
+                c[r].display();
+                break;
+            case 10:
                 ch = 'n';
                 break;
             default:
@@ -95,7 +121,7 @@ int main() {
     return 0;
 }
 
-void CircularLinkedList::insert(int option,
+void circularLinkedList::insert(int option,
                          int data, int position) {
     Node *temp = new Node;
     temp->data = data;
@@ -138,7 +164,7 @@ void CircularLinkedList::insert(int option,
     }
 }
 
-void CircularLinkedList::display() {
+void circularLinkedList::display() {
     link = head;
     cout << endl << "The list is: ";
     if (head != NULL) {
@@ -152,7 +178,7 @@ void CircularLinkedList::display() {
     cout << endl;
 }
 
-void CircularLinkedList::deleteNode(int option, 
+void circularLinkedList::deleteNode(int option, 
                             int position) {
     Node *temp = new Node;
     if (head == NULL)
@@ -161,7 +187,7 @@ void CircularLinkedList::deleteNode(int option,
         link = head;
         if (option == 1) { 
             // delete at beginning
-            link = temp = head;
+            temp = head;
             while (link->next != head) 
                 link = link->next;
             head = head->next;
@@ -171,9 +197,9 @@ void CircularLinkedList::deleteNode(int option,
             // delete at any position
             for (int i = 0; i < position - 1; i++)
                 link = link->next;
-                temp = link->next;
-                link->next = temp->next;
-                delete(temp);
+            temp = link->next;
+            link->next = temp->next;
+            delete(temp);
         } else if (option == 3) {
             // delete from last
             link = head;
@@ -184,4 +210,40 @@ void CircularLinkedList::deleteNode(int option,
             delete(temp);
         }
     }
+}
+
+void circularLinkedList::reverse() {
+    Node *forward, *current, *backward, *temp;
+    forward = head;
+    current = NULL;
+    while (forward != temp) {
+        backward = current;
+        current = forward;
+        forward = forward->next;
+        current->next = backward;
+    }
+    head = current;
+}
+
+void concatenate(circularLinkedList first, 
+    circularLinkedList second) {
+        if (first.head == NULL)
+            cout << endl << "First list has not"
+                << " been created";
+        else if (second.head == NULL)
+            cout << endl << "Second list has not"
+                << " been created";
+        else {
+            first.link = first.head;
+            while (first.link->next != first.head)
+                first.link = first.link->next;
+            cout << endl <<"End of list one";
+            first.link->next = second.head;
+            second.link = second.head;
+            while (second.head->next != second.head)
+                second.link = second.link->next;
+            second.link->next = first.head;
+            cout << endl << "After concatenating";
+            first.display();
+        }
 }

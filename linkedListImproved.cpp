@@ -32,15 +32,20 @@ class linkedList : private node {
 
 int main() {
     int d, choice, c, position, list, r;
-    char ch = 'y', h;
+    char ch = 'y', h, e;
     linkedList l[2];
     while (ch == 'y') {
         cout << endl << "You have two lists";
         cout << endl << "Do you want to concatenate " << 
             "the two lists(y/n): ";
         cin >> h;
-        if (h == 'y')
+        if (h == 'y') {
             concatenate(l[0], l[1]);
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                ch = 'n';
+        }
         cout << endl << "Which linked list do you want to" <<
             " work upon (1 or 2): ";
         cin >> list;
@@ -202,12 +207,9 @@ void concatenate(linkedList first, linkedList second) {
         return;
     } else {
         // Concatenating
-        cout << endl << "Concatenation";
         first.link = first.head;
-        cout << endl << "Under process";
         while (first.link->next != NULL)
             first.link = first.link->next;
-        cout << endl <<"End of list one";
         first.link->next = second.getHead();
         cout << endl << "After concatenating";
         first.display();
