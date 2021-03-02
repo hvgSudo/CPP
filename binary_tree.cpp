@@ -40,7 +40,7 @@ class binaryTree {
         void copy(binaryTree &);
 };
 
-int main() {
+int main() { // main method
     binaryTree b;
     b.create();
     b.preorder();
