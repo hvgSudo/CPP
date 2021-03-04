@@ -44,7 +44,12 @@ int main() {
             cout << endl << "Do you want to exit(y/n): ";
             cin >> e;
             if (e == 'y')
-                ch = 'n';
+                break;
+        } else {
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                break;
         }
         cout << endl << "Which linked list do you want to" <<
             " work upon (1 or 2): ";
@@ -123,8 +128,9 @@ void linkedList::insert(int data, int position, int place) {
         link = temp;
     } else {
         if (position == 1) {
-            link->next = temp;
-            link = temp;
+            link = head;
+            temp->next = head;
+            head = temp;
         } else if (position == 2) {
             link = head;
             while (n < place) {

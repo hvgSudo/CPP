@@ -240,7 +240,7 @@ void concatenate(circularLinkedList first,
             cout << endl <<"End of list one";
             first.link->next = second.head;
             second.link = second.head;
-            while (second.head->next != second.head)
+            while (second.link->next != second.head)
                 second.link = second.link->next;
             second.link->next = first.head;
             cout << endl << "After concatenating";
