@@ -217,7 +217,7 @@ void concatenate(linkedList first, linkedList second) {
         while (first.link->next != NULL)
             first.link = first.link->next;
         first.link->next = second.getHead();
-        cou << endl << "After concatenating";
+        cout << endl << "After concatenating";
         first.display();
     }
 }
