@@ -130,9 +130,9 @@ void circularLinkedList::insert(int option,
     // create the list
     if (option == 1) {
         if (head == NULL) {
-        head = link = temp;
-        temp->next = link;
-        } else  {
+            head = link = temp;
+            temp->next = link;
+        } else {
             link->next = temp;
             temp->next = head;
             link = link->next;
