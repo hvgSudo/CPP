@@ -22,8 +22,20 @@ class binaryTree {
             preorder(currentNode->right);
         }
     }
-    void inorder(node *currentNode);
-    void postorder(node *currentNode);
+    void inorder(node *currentNode) {
+        if (currentNode != NULL) {
+            inorder(currentNode->left);
+            cout << currentNode->data;
+            inorder(currentNode->right);
+        }
+    }
+    void postorder(node *currentNode) {
+        if (currentNode != NULL) {
+            postorder(currentNode->left);
+            postorder(currentNode->right);
+            cout << currentNode->data;
+        }
+    }
     public:
         binaryTree () {
             root = NULL;
@@ -88,4 +100,14 @@ void binaryTree::create() {
 void binaryTree::preorder() {
     cout << endl << "Preorder traversal: ";
     preorder(root);
+}
+
+void binaryTree::inorder() {
+    cout << endl << "Inorder traversal: ";
+    inorder(root);
+}
+
+void binaryTree::postorder() {
+    cout << endl << "Postorder traversal";
+    postorder(root);
 }
