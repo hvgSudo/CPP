@@ -190,7 +190,7 @@ void linkedList::deleteNode(int position) {
 }
 
 void linkedList::reverse() {
-    node *forward, *current, *backward;
+    node *forward, *backward, *current;
     forward = head;
     current = NULL;
     while (forward != NULL) {
@@ -200,7 +200,7 @@ void linkedList::reverse() {
         current->next = backward;
     }
     head = current;
-    cout << endl << "List successfully reversed";
+    cout << endl << "The list has been reversed\n";
     display();
 }
 
