@@ -28,6 +28,7 @@ class linkedList : private node {
         void display();
         void reverse();
         friend void concatenate(linkedList, linkedList);
+        void reverseRecursion(node);
 };
 
 int main() {
@@ -220,4 +221,17 @@ void concatenate(linkedList first, linkedList second) {
         cout << endl << "After concatenating";
         first.display();
     }
+}
+
+void linkedList::reverseRecursion(node *Node) {
+    if (Node == NULL)
+        return;
+    if (Node->next == NULL) {
+        head = Node;
+        return Node;
+    }
+    node *temp = reverseRecursion(Node->next);
+    temp->next = Node;
+    Node->next = NULL;
+    return Node;
 }

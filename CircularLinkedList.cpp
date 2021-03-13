@@ -24,7 +24,7 @@ class circularLinkedList : private Node {
 
 int main() {
     circularLinkedList c[2];
-    char ch = 'y', h;
+    char ch = 'y', h, e;
     int option = -1, data, position = -1;
     int choice, list, r;
     while (ch == 'y') {
@@ -32,8 +32,18 @@ int main() {
         cout << endl << "Do you want to concatenate " << 
             "the two lists(y/n): ";
         cin >> h;
-        if (h == 'y')
+        if (h == 'y') {
             concatenate(c[0], c[1]);
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                break;
+        } else {
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                break;
+        }
         cout << endl << "Which linked list do you want to" <<
             " work upon (1 or 2): ";
         cin >> list;
@@ -171,7 +181,7 @@ void circularLinkedList::display() {
         do {
             cout << link->data << " ";
             link = link->next;
-        } while (link != head);
+        } while (link != head->next);
     }
     else 
         cout << endl << "List is empty";
@@ -227,23 +237,23 @@ void circularLinkedList::reverse() {
 
 void concatenate(circularLinkedList first, 
     circularLinkedList second) {
-        if (first.head == NULL)
-            cout << endl << "First list has not"
-                << " been created";
-        else if (second.head == NULL)
-            cout << endl << "Second list has not"
-                << " been created";
-        else {
-            first.link = first.head;
-            while (first.link->next != first.head)
-                first.link = first.link->next;
-            cout << endl <<"End of list one";
-            first.link->next = second.head;
-            second.link = second.head;
-            while (second.link->next != second.head)
-                second.link = second.link->next;
-            second.link->next = first.head;
-            cout << endl << "After concatenating";
-            first.display();
-        }
+    if (first.head == NULL)
+        cout << endl << "First list has not"
+            << " been created";
+    else if (second.head == NULL)
+        cout << endl << "Second list has not"
+            << " been created";
+    else {
+        first.link = first.head;
+        while (first.link->next != first.head)
+            first.link = first.link->next;
+        cout << endl <<"End of list one";
+        first.link->next = second.head;
+        second.link = second.head;
+        while (second.link->next != second.head)
+            second.link = second.link->next;
+        second.link->next = first.head;
+        cout << endl << "After concatenating";
+        first.display();
+    }
 }
