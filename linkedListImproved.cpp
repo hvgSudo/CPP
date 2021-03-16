@@ -222,7 +222,7 @@ void concatenate(linkedList first, linkedList second) {
         first.display();
     }
 }
-
+/*
 void linkedList::reverseRecursion(node *Node) {
     if (Node == NULL)
         return;
@@ -234,4 +234,4 @@ void linkedList::reverseRecursion(node *Node) {
     temp->next = Node;
     Node->next = NULL;
     return Node;
-}
+}*/
