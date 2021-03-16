@@ -93,6 +93,7 @@ int main() {
                 break;
             case 5:
                 d[index].reverseDLL();
+                d[index].display();
                 break;
             case 6:
                 exit = 1;
@@ -205,10 +206,10 @@ void DLL::deleteNode(int option, int position) {
 void DLL::display() {
     cout << "\nThe list is ";
     link = head;
-    do {
+    while (link != NULL) {
         cout << link->data << " ";
         link = link->next;
-    } while (link->next != NULL);
+    }
 }
 
 void DLL::reverseDLL() {

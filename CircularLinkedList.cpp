@@ -117,8 +117,8 @@ int main() {
                 break;
             case 9:
                 c[r].display();
-                c[r].reverse();
                 cout << endl << "After reversal";
+                c[r].reverse();
                 c[r].display();
                 break;
             case 10:
@@ -181,7 +181,8 @@ void circularLinkedList::display() {
         do {
             cout << link->data << " ";
             link = link->next;
-        } while (link->next != head->next);
+        } while (link != head);
+        cout << link->data;
     }
     else 
         cout << endl << "List is empty";
@@ -223,16 +224,19 @@ void circularLinkedList::deleteNode(int option,
 }
 
 void circularLinkedList::reverse() {
-    Node *forward, *current, *backward, *temp;
-    forward = head;
-    current = NULL;
-    while (forward != temp) {
-        backward = current;
-        current = forward;
-        forward = forward->next;
-        current->next = backward;
-    }
-    head = current;
+    if (head == NULL) 
+        return; 
+    Node* prev = NULL; 
+    Node* current = head; 
+    Node* next; 
+    do { 
+        next = current->next; 
+        current->next = prev; 
+        prev = current; 
+        current = next; 
+    } while (current != head); 
+    head->next = prev; 
+    head = prev;
 }
 
 void concatenate(circularLinkedList first, 
