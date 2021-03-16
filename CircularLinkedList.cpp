@@ -181,7 +181,7 @@ void circularLinkedList::display() {
         do {
             cout << link->data << " ";
             link = link->next;
-        } while (link != head->next);
+        } while (link->next != head->next);
     }
     else 
         cout << endl << "List is empty";
