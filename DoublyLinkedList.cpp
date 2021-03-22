@@ -92,6 +92,7 @@ int main() {
                 d[index].display();
                 break;
             case 5:
+                d[index].display();
                 d[index].reverseDLL();
                 d[index].display();
                 break;
@@ -156,14 +157,15 @@ void DLL::insertNodePosition(int data, int position) {
     temp->data = data;
     temp->next = NULL;
     temp->prev = NULL;
-    int currentPosition = 1;
+    int currentPosition = 0;
     link = head;
     while (currentPosition < position) {
         link = link->next;
         currentPosition++;
     }
-    link->next = temp;
+    temp->next = link->next;
     temp->prev = link;
+    link->next = temp;
     if (link->next->next == NULL) {
         temp->next = link->next->next;
         link->next->next->prev = temp;
@@ -213,16 +215,17 @@ void DLL::display() {
 }
 
 void DLL::reverseDLL() {
-    node *current, *forward;
-    forward = head;
+    node *current, *temp;
+    temp = NULL;
+    current = head;
     while (current != NULL) {
-        current = forward->prev;
-        forward->prev = forward->next;
-        forward->next = current;
-        forward = forward->prev;
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
     }
-    if (current != NULL)
-    forward = current->prev;
+    if (temp != NULL)
+        head = temp->prev;
 }
 
 void DLL::concatenate(DLL d) {

@@ -29,21 +29,6 @@ int main() {
     int choice, list, r;
     while (ch == 'y') {
         cout << endl << "You have two lists";
-        cout << endl << "Do you want to concatenate " << 
-            "the two lists(y/n): ";
-        cin >> h;
-        if (h == 'y') {
-            concatenate(c[0], c[1]);
-            cout << endl << "Do you want to exit(y/n): ";
-            cin >> e;
-            if (e == 'y')
-                break;
-        } else {
-            cout << endl << "Do you want to exit(y/n): ";
-            cin >> e;
-            if (e == 'y')
-                break;
-        }
         cout << endl << "Which linked list do you want to" <<
             " work upon (1 or 2): ";
         cin >> list;
@@ -126,6 +111,21 @@ int main() {
                 break;
             default:
                 cout << endl << "Wrong choice";
+        }
+        cout << endl << "Do you want to concatenate " << 
+            "the two lists(y/n): ";
+        cin >> h;
+        if (h == 'y') {
+            concatenate(c[0], c[1]);
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                break;
+        } else {
+            cout << endl << "Do you want to exit(y/n): ";
+            cin >> e;
+            if (e == 'y')
+                break;
         }
     }
     return 0;
@@ -224,19 +224,19 @@ void circularLinkedList::deleteNode(int option,
 }
 
 void circularLinkedList::reverse() {
-    if (head == NULL) 
-        return; 
-    Node* prev = NULL; 
-    Node* current = head; 
-    Node* next; 
-    do { 
-        next = current->next; 
-        current->next = prev; 
-        prev = current; 
-        current = next; 
-    } while (current != head); 
-    head->next = prev; 
-    head = prev;
+    if (head == NULL)
+        return;
+    Node *prev = NULL;
+    Node *current = head;
+    Node *next;
+    do {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    } while (current != head);
+    current->next = prev;
+    current = prev;
 }
 
 void concatenate(circularLinkedList first, 
