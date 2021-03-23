@@ -238,14 +238,14 @@ void binaryTree::postorderLoop(node *copy) {
         while (copy != NULL) {
             if (copy->right)
                 s.push(copy->right);
-            s.push(copy);
-            copy = copy->left;
+            s.push(copy); 
+            copy = copy->left; 
         }
-        copy = s.pop();
+        copy = s.pop(); 
         if (copy->right && s.getTop() == copy->right) {
-            s.pop();
-            s.push(copy);
-            copy = copy->right;
+            s.pop(); 
+            s.push(copy); 
+            copy = copy->right; 
         } else {
             cout << copy->data << " ";
             copy = NULL;
