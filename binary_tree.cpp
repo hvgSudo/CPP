@@ -39,7 +39,7 @@ class binaryTree {
             preorder(currentNode->left);
             preorder(currentNode->right);
         }
-    }
+    } // recursive
     void inorder(node *currentNode) {
         if (currentNode != NULL) {
             inorder(currentNode->left);
@@ -54,7 +54,7 @@ class binaryTree {
             cout << currentNode->data << " ";
         }
     }
-    void preorderLoop(node *);
+    void preorderLoop(node *); // non recursive
     void inorderLoop(node *);
     void postorderLoop(node *);
     
