@@ -13,7 +13,7 @@ class node {
         friend class binaryTree;
 };
 
-class stack {
+class stack { 
     int top;
     node *data[10];
     public:
