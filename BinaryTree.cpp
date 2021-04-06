@@ -38,34 +38,74 @@ int main() {
 }
 
 void BT::create() {
-    Node *newNode;
+    Node *newNode, *temp;
     int number;
+    char position, ch;
     cout << "\nEnter the root node: ";
     cin >> number;
     newNode = new Node(number);
-    root = newNode;
+    if (root == NULL)
+        root = newNode;
+    else {
+        temp = root;
+        do {
+            cout << "\nEnter the number: ";
+            cin >> number;
+            newNode = new Node(number);
+            while (true) {
+                cout << "\nLeft or right (l/r) of " << temp->data << ": ";
+                cin >> position;
+                if (position == 'l') {
+                    if (temp->left == NULL) {
+                        temp->left = newNode;
+                        break;
+                    }
+                    else
+                        temp = temp->left;
+                } else if (position == 'r') {
+                    if (temp->right == NULL) {
+                        temp->right = newNode;
+                        break;
+                    }
+                    else
+                        temp = temp->right;
+                }
+            }
+            cout << "\nDo you want to insert more elements(y/n): ";
+            cin >> ch;
+        }while(ch == 'y' || ch == 'Y');
+    }
 }
 
 void BT::insert() {
     Node *newNode;
     Node *temp = root;
     int number;
-    string position;
-    cout << "\nEnter the number: ";
-    cin >> number;
-    newNode = new Node(number);
-    while (true) {
-        cout << "\nleft or right of " << temp->data << ": ";
-        cin >> position;
-        if (position.toLowerCase().compare("left")) {
-            if (temp->left == NULL) {
-                temp->left = newNode;
-                break;
+    char position, ch;
+    do {
+        cout << "\nEnter the number: ";
+        cin >> number;
+        newNode = new Node(number);
+        while (true) {
+            cout << "\nLeft or right (l/r) of " << temp->data << ": ";
+            cin >> position;
+            if (position == 'l') {
+                if (temp->left == NULL) {
+                    temp->left = newNode;
+                    break;
+                }
+                else
+                    temp = temp->left;
+            } else if (position == 'r') {
+                if (temp->right == NULL) {
+                    temp->right = newNode;
+                    break;
+                }
+                else
+                    temp = temp->right;
             }
-            else
-                temp = temp->left;
-        } else if (position.tLowerCase().compare("right")) {
-
         }
-    }            
+        cout << "\nDo you want to insert more elements(y/n): ";
+        cin >> ch;
+    }while(ch == 'y' || ch == 'Y');            
 }
