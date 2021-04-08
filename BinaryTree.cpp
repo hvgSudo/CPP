@@ -214,7 +214,7 @@ void BT::postorderLoop(Node *current) {
             current = current->left;
         }
         current = s.pop();
-        if (current->right &&s.peek() == current->right) {
+        if (current->right && s.peek() == current->right) {
             s.pop();
             s.push(current);
             current = current->right;
