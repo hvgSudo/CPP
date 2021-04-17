@@ -19,12 +19,15 @@ class BST {
         Node *root;
         void inorder(Node *temp) {
             if (temp != NULL) {
-                inorder(temp->left);
+                if (temp->left)
+                    inorder(temp->left);
                 cout << temp->data << " ";
-                inorder(temp->right);
+                if (temp->right)
+                    inorder(temp->right);
             }
         }
     public:
+        BST() { root = NULL; }
         Node *getRoot() { return root; }
         void setRoot(Node *node) { root = node; }
         void insertNode();
@@ -73,27 +76,30 @@ int main() { // Main function
 
 
 void BST::insertNode() {
-    Node *newNode, *temp;
+    Node *newNode, *temp, *parentNode;
     int data;
-    newNode = new Node(data);
-    temp = getRoot();
     char ch;        
     do {
         cout << "\nEnter the number to be inserted: ";
         cin >> data;
-        if (getRoot() == NULL) 
+        newNode = new Node(data);
+        if (getRoot() == NULL) {
             setRoot(newNode);
-        else {
-            while (temp != NULL) {
+        } else {
+            temp = getRoot();
+            while (temp) {
+                cout << "\nBeing processed inside while";
+                parentNode = temp;
                 if (data > temp->data)
                     temp = temp->right;
                 else
                     temp = temp->left;
             }  
-            if (data > temp->data)
-                temp->right = newNode;
+            cout << "\nbeing processed outside while";
+            if (data > parentNode->data)
+                parentNode->right = newNode;
             else 
-                temp->left = newNode;
+                parentNode->left = newNode;
         }
         cout << "\nNumber inserted";
         cout << "\nDo you want to enter more numbers (y/n): ";
