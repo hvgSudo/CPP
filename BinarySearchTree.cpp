@@ -8,9 +8,10 @@ class Node {
         Node *left, *right;
     public:
         Node(int data) {
-            data = data;
+            this->data = data;
             left = right = NULL;
         }
+        void setData(int data) { this->data = data; }
         friend class BST;
 };
 
@@ -32,6 +33,12 @@ class BST {
             cout << "\nInorder traversal of the tree -> ";
             inorder(root);
         }
+        void displayManual() {
+            Node *temp = root;
+            cout << temp->data << " " <<
+                temp->left->data << " " <<
+                temp->right->data << " ";
+        }
         ~BST() { delete(root); }
 };
 
@@ -39,7 +46,8 @@ void printActionMenu() {
     cout << "\n1. Insert into the tree" <<
             "\n2. Delete from the tree" <<
             "\n3. View the inorder traversal of the tree" << 
-            "\n4. Exit";
+            "\n4. Exit"
+            "\n5. Display Manual";
 }
 
 int main() { // Main function
@@ -63,14 +71,15 @@ int main() { // Main function
             case 4:
                 exit = true;
                 break;
+            case 5:
+                tree.displayManual();
+                break;
             default:
                 cout << "\nWrong choice";
         }
     } 
     return 0;
 }
-
-
 
 void BST::insertNode() {
     Node *newNode, *temp, *parentNode;
@@ -79,27 +88,34 @@ void BST::insertNode() {
     do {
         cout << "\nEnter the number to be inserted: ";
         cin >> data;
-        newNode = new Node(data);
+        // newNode = new Node(data);
         if (root == NULL) {
-            root = newNode;
+            root = new Node(data);
             cout << "\nroot->data = " << root->data;
         }
         else {
             temp = root;
-            while (temp) {
-                parentNode = temp;
-                if (data > temp->data)
+            while (true) { // temp != NULL) {
+                // parentNode = temp;
+                
+                if (data > temp->data && temp->right != NULL) {
+                    cout << "\ntemp->data = " << temp->data;
                     temp = temp->right;
-                else
+                } else if (data > temp->data && temp->right == NULL) {
+                    temp = new Node(data);
+                    break;
+                } else if (data < temp->data && temp->left != NULL) {
+                    cout << "\ntemp->data = " << temp->data;
                     temp = temp->left;
-            }  
-            if (data > parentNode->data)
-                parentNode->right = newNode;
-            else 
-                parentNode->left = newNode;
-            cout << "\nnewNode->data = " << newNode->data;
+                } else if (data < temp->data && temp->left == NULL) {
+                    temp = new Node(data);
+                    break;
+                }
+            }
+            temp->setData(data);
+            // cout << "\nnewNode->data = " << newNode->data;
             cout << "\ntemp->data = " << temp->data;
-            cout << "\nparentNode->data = " << parentNode->data;
+            // cout << "\nparentNode->data = " << parentNode->data;
         }
         cout << "\nNumber inserted";
         cout << "\nDo you want to enter more numbers (y/n): ";
