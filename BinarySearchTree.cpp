@@ -19,23 +19,20 @@ class BST {
         Node *root;
         void inorder(Node *temp) {
             if (temp != NULL) {
-                if (temp->left)
-                    inorder(temp->left);
+                inorder(temp->left);
                 cout << temp->data << " ";
-                if (temp->right)
-                    inorder(temp->right);
+                inorder(temp->right);
             }
         }
     public:
         BST() { root = NULL; }
-        Node *getRoot() { return root; }
-        void setRoot(Node *node) { root = node; }
         void insertNode();
         void deleteNode();
         void display() {
             cout << "\nInorder traversal of the tree -> ";
-            inorder(getRoot());
+            inorder(root);
         }
+        ~BST() { delete(root); }
 };
 
 void printActionMenu() {
@@ -83,23 +80,26 @@ void BST::insertNode() {
         cout << "\nEnter the number to be inserted: ";
         cin >> data;
         newNode = new Node(data);
-        if (getRoot() == NULL) {
-            setRoot(newNode);
-        } else {
-            temp = getRoot();
+        if (root == NULL) {
+            root = newNode;
+            cout << "\nroot->data = " << root->data;
+        }
+        else {
+            temp = root;
             while (temp) {
-                cout << "\nBeing processed inside while";
                 parentNode = temp;
                 if (data > temp->data)
                     temp = temp->right;
                 else
                     temp = temp->left;
             }  
-            cout << "\nbeing processed outside while";
             if (data > parentNode->data)
                 parentNode->right = newNode;
             else 
                 parentNode->left = newNode;
+            cout << "\nnewNode->data = " << newNode->data;
+            cout << "\ntemp->data = " << temp->data;
+            cout << "\nparentNode->data = " << parentNode->data;
         }
         cout << "\nNumber inserted";
         cout << "\nDo you want to enter more numbers (y/n): ";
@@ -112,11 +112,12 @@ void BST::deleteNode() {
     char ch;
     int data;
     bool foundNode = false;
-    temp = getRoot();
+    temp = root;
     do {
         cout << "\nEnter the number to be deleted: ";
         cin >> data;
         while (temp != NULL) {
+            cout << "\ntemp->data = " << temp->data;
             if (data == temp->data) {
                 foundNode = true;
                 break;
