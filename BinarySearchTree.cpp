@@ -11,7 +11,6 @@ class Node {
             this->data = data;
             left = right = NULL;
         }
-        void setData(int data) { this->data = data; }
         friend class BST;
 };
 
@@ -33,12 +32,7 @@ class BST {
             cout << "\nInorder traversal of the tree -> ";
             inorder(root);
         }
-        void displayManual() {
-            Node *temp = root;
-            cout << temp->data << " " <<
-                temp->left->data << " " <<
-                temp->right->data << " ";
-        }
+        void searchTree();
         ~BST() { delete(root); }
 };
 
@@ -46,8 +40,8 @@ void printActionMenu() {
     cout << "\n1. Insert into the tree" <<
             "\n2. Delete from the tree" <<
             "\n3. View the inorder traversal of the tree" << 
-            "\n4. Exit"
-            "\n5. Display Manual";
+            "\n4. Search for an element in the tree" <<
+            "\n5. Exit";
 }
 
 int main() { // Main function
@@ -69,10 +63,10 @@ int main() { // Main function
                 tree.display();
                 break;
             case 4:
-                exit = true;
+                tree.searchTree();
                 break;
             case 5:
-                tree.displayManual();
+                exit = true;
                 break;
             default:
                 cout << "\nWrong choice";
@@ -88,34 +82,22 @@ void BST::insertNode() {
     do {
         cout << "\nEnter the number to be inserted: ";
         cin >> data;
-        // newNode = new Node(data);
-        if (root == NULL) {
-            root = new Node(data);
-            cout << "\nroot->data = " << root->data;
-        }
+        newNode = new Node(data);
+        if (root == NULL) 
+            root = newNode;
         else {
             temp = root;
-            while (true) { // temp != NULL) {
-                // parentNode = temp;
-                
-                if (data > temp->data && temp->right != NULL) {
-                    cout << "\ntemp->data = " << temp->data;
+            while (temp != NULL) {
+                parentNode = temp;
+                if (data > temp->data) 
                     temp = temp->right;
-                } else if (data > temp->data && temp->right == NULL) {
-                    temp = new Node(data);
-                    break;
-                } else if (data < temp->data && temp->left != NULL) {
-                    cout << "\ntemp->data = " << temp->data;
+                else
                     temp = temp->left;
-                } else if (data < temp->data && temp->left == NULL) {
-                    temp = new Node(data);
-                    break;
-                }
             }
-            temp->setData(data);
-            // cout << "\nnewNode->data = " << newNode->data;
-            cout << "\ntemp->data = " << temp->data;
-            // cout << "\nparentNode->data = " << parentNode->data;
+            if (data > parentNode->data)
+                parentNode->right = newNode;
+            else
+                parentNode->left = newNode;
         }
         cout << "\nNumber inserted";
         cout << "\nDo you want to enter more numbers (y/n): ";
@@ -133,7 +115,6 @@ void BST::deleteNode() {
         cout << "\nEnter the number to be deleted: ";
         cin >> data;
         while (temp != NULL) {
-            cout << "\ntemp->data = " << temp->data;
             if (data == temp->data) {
                 foundNode = true;
                 break;
@@ -205,4 +186,31 @@ void BST::deleteNode() {
         cout << "\nDo you want to remove more nodes (y/n): ";
         cin >> ch;
     } while(ch == 'y' || ch == 'Y');
+}
+
+void BST::searchTree() {
+    Node *swapNode, *temp = root;
+    char ch;
+    bool foundNode = false;
+    int data, j = 0, present = -1;
+    do {
+        cout << "\nEnter the number to be deleted: ";
+        cin >> data;
+        while (temp != NULL) {
+            if (data == temp->data) {
+                foundNode = true;
+                break;
+            } else {
+                swapNode = temp;
+                if (data > temp->data)
+                    temp = temp->right;
+                else    
+                    temp = temp->left;
+            }
+        }
+        if (!foundNode) 
+            cout << "\n" << data << " not found in the tree";
+        cout << "\nDo you want to search for more elements(y/n): ";
+        cin >> ch;
+    }while (ch == 'y' || ch == 'Y');
 }
