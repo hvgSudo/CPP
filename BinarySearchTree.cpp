@@ -78,18 +78,18 @@ int main() { // Main function
 void BST::insertNode() {
     Node *newNode, *temp, *parentNode;
     int data;
-    char ch;        
+    char ch;
     do {
-        cout << "\nEnter the number to be inserted: ";
+        cout << "\nEnter the data to be inserted: ";
         cin >> data;
+        temp = root;
         newNode = new Node(data);
-        if (root == NULL) 
+        if (root == NULL)
             root = newNode;
         else {
-            temp = root;
-            while (temp != NULL) {
+            while (temp!= NULL) {
                 parentNode = temp;
-                if (data > temp->data) 
+                if (data > temp->data)
                     temp = temp->right;
                 else
                     temp = temp->left;
@@ -99,10 +99,9 @@ void BST::insertNode() {
             else
                 parentNode->left = newNode;
         }
-        cout << "\nNumber inserted";
-        cout << "\nDo you want to enter more numbers (y/n): ";
+        cout << "\nDo you want to continue(y/n): ";
         cin >> ch;
-    } while(ch == 'y' || ch == 'Y');
+    }while (ch == 'y' || ch == 'Y');
 }
 
 void BST::deleteNode() {
