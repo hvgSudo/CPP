@@ -1,4 +1,5 @@
 #include<iostream>
+#include<list>
 
 using namespace std;
 const int MAX = 4;
@@ -17,13 +18,13 @@ class graphNode { // Node class
 
 class AL {
     private:
-        graphNode *list[20];
+        list<graphNode> *adjList;
         int numberOfVertices;
     public:
         AL() {
             numberOfVertices = MAX;
             for (int j = 0; j < MAX; j++)
-                list[j] = NULL;
+                adjList[j] = NULL;
         }
         void insert();
         void display();
@@ -65,13 +66,13 @@ void AL::insert() {
     char ch;
     for (int i = 0; i < numberOfVertices; i++) {
         for (int j = 0; j < numberOfVertices; j++) {
-            cout << "\nIs there an edge between vertex "<< i+1 <<
-            j+1 << ": ";
+            cout << "\nIs there an edge between vertex "<< i <<
+            " and " << j << ": ";
             cin >> ch;
             if (ch == 'y') {
                 newNode = new graphNode(j + 1);
-                if (list[i] == NULL) 
-                    list[i] = temp = newNode;
+                if (adjList[i] == NULL) 
+                    adjList[i] = temp = newNode;
                 else {
                     temp->next = newNode;
                     temp = newNode;
@@ -83,9 +84,11 @@ void AL::insert() {
 
 void AL::display() {
     graphNode *temp;
-    for (int i = 0; i < numberOfVertices; i++) {
+    int i = 0;
+    list<graphNode> :: iterator it;
+    for (it = adjList.begin(); it != adjList.end(); ++i, ++it) {
         cout << "\nVertex " << i+1 << "->";
-        temp = list[i];
+        temp = *it;
         while(temp != NULL) {
             cout << "v" << temp->vertex << "->";
             temp = temp->next;
