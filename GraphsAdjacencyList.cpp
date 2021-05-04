@@ -1,6 +1,7 @@
 #include<iostream>
 
 using namespace std;
+const int MAX = 4;
 
 class graphNode { // Node class
     private:
@@ -19,9 +20,9 @@ class AL {
         graphNode *list[20];
         int numberOfVertices;
     public:
-        AL(int n) {
-            numberOfVertices = n;
-            for (int j = 0; j < n; j++)
+        AL() {
+            numberOfVertices = MAX;
+            for (int j = 0; j < MAX; j++)
                 list[j] = NULL;
         }
         void insert();
@@ -36,7 +37,7 @@ void menu() {
 
 int main() { // Main function
     int choice;
-    AL a = new AL(5);
+    AL a;
     bool exit = false;
     while(!exit) {
         menu();
@@ -61,15 +62,14 @@ int main() { // Main function
 
 void AL::insert() {
     graphNode *temp, *newNode;
-    char ans;
+    char ch;
     for (int i = 0; i < numberOfVertices; i++) {
         for (int j = 0; j < numberOfVertices; j++) {
             cout << "\nIs there an edge between vertex "<< i+1 <<
             j+1 << ": ";
-            cin >> ans;
-            if (ans == 'y') {
+            cin >> ch;
+            if (ch == 'y') {
                 newNode = new graphNode(j + 1);
-
                 if (list[i] == NULL) 
                     list[i] = temp = newNode;
                 else {
