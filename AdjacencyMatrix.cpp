@@ -2,6 +2,17 @@
 
 using namespace std;
 
+void initCode() {
+    #ifndef A
+    // For getting input from input.txt file
+    freopen("D:/Codes/CPP/inputCPP.txt", "r", stdin);
+  
+    // Printing the Output to output.txt file
+    freopen("D:/Codes/CPP/outputCPP.txt", "w", stdout);
+  
+    #endif
+}
+
 class Graph {
     private:
         bool **adjacencyMatrix;
@@ -45,6 +56,7 @@ class Graph {
 };
 
 int main() { // Main Method
+    initCode();
     Graph g(4);
 
     g.addEdges(0, 1);
