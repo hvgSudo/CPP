@@ -16,7 +16,7 @@ class Node {
 
 class SLL {
     private:
-        Node* head;
+        Node *head, *link;
     public:
         SLL() {
             head = NULL;
@@ -39,4 +39,9 @@ void printMenu() {
 int main() {
     SLL s;
     return 0;
+}
+
+// Insert node into the list
+void SLL::insert(int data) {
+    
 }
